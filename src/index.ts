@@ -1,33 +1,16 @@
-// let employee: {
-//   id: number;
-//   name: string;
-//   retire: (date: Date) => void;
-// } = {
-//   id: 1,
-//   name: "Marry",
-//   retire: (date: Date): void => {
-//     console.log(date);
-//   },
-// };
+// Union Type |
 
-type Employee = {
-  id: number;
-  name: string;
-  retire: (date: Date) => void;
-};
+// example:
+function kgToLbs(weight: number | string): number {
+  // weight. // we don't see completion for string or number because in this point ts doesn't know which is type of the wight so we can use narrowing technic:
 
-let employee1: Employee = {
-  id: 1,
-  name: "Alex",
-  retire: (date: Date): void => {
-    console.log(date);
-  },
-};
+  // Narrowing
+  if (typeof weight === "number") {
+    return weight * 2.2;
+  } else {
+    return parseInt(weight) * 2.2;
+  }
+}
 
-let employee2: Employee = {
-  id: 2,
-  name: "Marry",
-  retire: (date: Date): void => {
-    console.log(date);
-  },
-};
+kgToLbs(10);
+kgToLbs("10");
