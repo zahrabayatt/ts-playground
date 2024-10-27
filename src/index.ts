@@ -1,15 +1,8 @@
-// if we dealer a variable and don't assign it, ts assume the type of it as any:
-let level;
+let numbers = [1, 2, "3"];
 
-// now we can assign any type to it but it is against of ts purpose and we lose the ts features and type safety and type checking, so we should use any as much as possible.
-level = "";
-level = 12;
+let values: string[] = ["a", "B", "c"];
+// we have code compilation
+values.forEach((n) => console.log(n.toLowerCase()));
 
-function render(document: any) {
-  console.log(document);
-}
-
-// disable the error enable the "noImplicitAny": false in tsconfig.json file
-// function render1(document) {
-//   console.log(document);
-// }
+// the type become any
+let empty = [];
