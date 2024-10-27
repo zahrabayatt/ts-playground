@@ -1,8 +1,8 @@
-let numbers = [1, 2, "3"];
+let user: [number, string] = [1, "Mosh"];
 
-let values: string[] = ["a", "B", "c"];
-// we have code compilation
-values.forEach((n) => console.log(n.toLowerCase()));
+// tuple only useful when we have only two values!
 
-// the type become any
-let empty = [];
+let a: [number, string, boolean, number] = [1, "Mosh", true, 9];
+
+// because when tuple compile to js file it compile as array we have also function of array for tuple but don't use this one because it might make problems in your code:
+a.push("a");
