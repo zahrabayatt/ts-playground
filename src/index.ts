@@ -1,26 +1,15 @@
-// JS built-in types:
-// number
-// string
-// boolean
-// null
-// undefined
-// object
-
-// TS built-in types:
-// it extend the js built-in types with:
-// any
-// unknown
-// never
-// enum
-// tuple
-
-// in ts, if you have a large number you can sprat this using underline
-let sales: number = 123_456_789;
-let course: string = "TypeScript";
-let is_published: boolean = true;
-
-// if you don't specify the type of variable using annotation when defining it, ts detect that base on the value you assigned.
-let message = "hello";
-
 // if we dealer a variable and don't assign it, ts assume the type of it as any:
-let a;
+let level;
+
+// now we can assign any type to it but it is against of ts purpose and we lose the ts features and type safety and type checking, so we should use any as much as possible.
+level = "";
+level = 12;
+
+function render(document: any) {
+  console.log(document);
+}
+
+// disable the error enable the "noImplicitAny": false in tsconfig.json file
+// function render1(document) {
+//   console.log(document);
+// }
