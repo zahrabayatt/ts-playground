@@ -1,14 +1,26 @@
-// for drugging ts file enable the "sourceMap": true in tsconfig.json and run tsc command to get index.js.map for debugging machine.
+// JS built-in types:
+// number
+// string
+// boolean
+// null
+// undefined
+// object
 
-// in debug panel click on create a lunch.json file. this file tell to vs code how to debug our code.
+// TS built-in types:
+// it extend the js built-in types with:
+// any
+// unknown
+// never
+// enum
+// tuple
 
-//in lunch.json add this config after program:
-// "preLaunchTask": "tsc: build - tsconfig.json",
-// with this setting, we tell vs code to use ts compiler to build application using the lunch.setting file
+// in ts, if you have a large number you can sprat this using underline
+let sales: number = 123_456_789;
+let course: string = "TypeScript";
+let is_published: boolean = true;
 
-let age: number = 24;
-if (age < 59) {
-  age += 10;
-}
+// if you don't specify the type of variable using annotation when defining it, ts detect that base on the value you assigned.
+let message = "hello";
 
-console.log(age);
+// if we dealer a variable and don't assign it, ts assume the type of it as any:
+let a;
