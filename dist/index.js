@@ -1,12 +1,13 @@
 "use strict";
-let employee = { id: 1 };
-let user = {
+let employee1 = {
     id: 1,
-    name: "zahra",
+    name: "Alex",
+    retire: (date) => {
+        console.log(date);
+    },
 };
-let person = { id: 1, name: "Alex" };
-let customer = {
-    id: 1,
+let employee2 = {
+    id: 2,
     name: "Marry",
     retire: (date) => {
         console.log(date);
