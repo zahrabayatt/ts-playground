@@ -1,23 +1,30 @@
-// the null or undefined value is common source of problem in codes, so typescript by default avoiding us to using it:
+type Customer = {
+  birthday?: Date;
+};
 
-function great(name: string) {
-  console.log(name.toUpperCase());
+function getCustomer(id: number): Customer | null | undefined {
+  return id === 0 ? null : { birthday: new Date() };
 }
 
-// great(null); // we got a compilation error, we can assign null to string
+let customer = getCustomer(0);
 
-// we can overwrite the strict behavior of typescript about null or undefined by enable this setting in tsconfig.json:
-// "strictNullChecks": false
-// when a strict setting is true in tsconfig.json, the strictNullChecks is enabled as a part of this setting but we can overwrite it like the way I explained in above line.
-
-// If you want to be able to pass the null or undefined values to the great function you can use union types:
-function great1(name: string | null | undefined) {
-  if (name) {
-    console.log(name.toUpperCase());
-  } else {
-    console.log("Hola!");
-  }
+if (customer !== null && customer !== undefined) {
+  console.log(customer.birthday);
 }
 
-great1(null);
-great1(undefined);
+// There is a simpler way to writing this code in typescript:
+
+// we can use Optional property access operator (?) instead of checking customer is null or undefined:
+console.log(customer?.birthday);
+
+// if the birthday is a optional property:
+console.log(customer?.birthday?.getFullYear());
+
+// we have Optional element access operator:
+// customers?.[0]
+
+// we have Optional call operator:
+let log: any = (message: string) => console.log(message);
+log = null;
+// log could be null because the type of it is any:
+log?.("a");
