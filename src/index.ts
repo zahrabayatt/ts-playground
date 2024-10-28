@@ -1,20 +1,16 @@
-// Intersection Types
+// sometimes we want to limit values that we can assign to a variable, this is where we can use Literal Types.
+// Literal means exact, specific
 
-let weight: number & string; // this is impossible because we don't have a object with both number and string at the same time
+// for example quantity could only be 50 or 100
+let quantity: 50 | 100 = 50;
 
-// Good Example:
+// or we can define a type for literals 50, 100
+type Quantity = 50 | 100;
 
-type Draggable = {
-  drag: () => void;
-};
+let anotherQuantity: Quantity = 100;
 
-type Resizable = {
-  resize: () => void;
-};
+// literals could be number or string
 
-type UIWidget = Draggable & Resizable;
-
-let textBox: UIWidget = {
-  drag: () => {},
-  resize: () => {},
-};
+// another example:
+type Metric = "cm" | "inch";
+let size: Metric = "cm";
