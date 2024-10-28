@@ -1,16 +1,23 @@
-// sometimes we want to limit values that we can assign to a variable, this is where we can use Literal Types.
-// Literal means exact, specific
+// the null or undefined value is common source of problem in codes, so typescript by default avoiding us to using it:
 
-// for example quantity could only be 50 or 100
-let quantity: 50 | 100 = 50;
+function great(name: string) {
+  console.log(name.toUpperCase());
+}
 
-// or we can define a type for literals 50, 100
-type Quantity = 50 | 100;
+// great(null); // we got a compilation error, we can assign null to string
 
-let anotherQuantity: Quantity = 100;
+// we can overwrite the strict behavior of typescript about null or undefined by enable this setting in tsconfig.json:
+// "strictNullChecks": false
+// when a strict setting is true in tsconfig.json, the strictNullChecks is enabled as a part of this setting but we can overwrite it like the way I explained in above line.
 
-// literals could be number or string
+// If you want to be able to pass the null or undefined values to the great function you can use union types:
+function great1(name: string | null | undefined) {
+  if (name) {
+    console.log(name.toUpperCase());
+  } else {
+    console.log("Hola!");
+  }
+}
 
-// another example:
-type Metric = "cm" | "inch";
-let size: Metric = "cm";
+great1(null);
+great1(undefined);
