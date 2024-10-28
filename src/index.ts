@@ -1,16 +1,20 @@
-// Union Type |
+// Intersection Types
 
-// example:
-function kgToLbs(weight: number | string): number {
-  // weight. // we don't see completion for string or number because in this point ts doesn't know which is type of the wight so we can use narrowing technic:
+let weight: number & string; // this is impossible because we don't have a object with both number and string at the same time
 
-  // Narrowing
-  if (typeof weight === "number") {
-    return weight * 2.2;
-  } else {
-    return parseInt(weight) * 2.2;
-  }
-}
+// Good Example:
 
-kgToLbs(10);
-kgToLbs("10");
+type Draggable = {
+  drag: () => void;
+};
+
+type Resizable = {
+  resize: () => void;
+};
+
+type UIWidget = Draggable & Resizable;
+
+let textBox: UIWidget = {
+  drag: () => {},
+  resize: () => {},
+};
