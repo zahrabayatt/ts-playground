@@ -1,34 +1,21 @@
-// any type represent of any type in typescript and we should avoid to use it as much as possible, but in situations like converting a JS code to TS code, sometimes you need to use it, for example:
+// The never type represents the values that never occur, quit frequently it is not the type that we used.
 
-// if we use any for document, it is possible base on document we pass these methods that we called didn't exist in document that we passed and it makes our program crashes
-function render(document: any) {
-  document.move();
-  document.fly();
-  document.whateverWeWant();
-}
+// example using never as return type:
+// we want to this function to run continuously and process some events, perhaps it watches a queue to process events, so we can annotate the type of this function with nerve and tell compiler this function never return:
 
-// to avoid to happen this problem, we can use unknown type and for each of this call we gat a error that we don't know the type of the document, then for fixing that we can use narrowing:
-
-function anotherRender(document: unknown) {
-  if (typeof document === "string") {
-    document.toUpperCase();
+function processEvents(): never {
+  while (true) {
+    // Read a message form a queue
   }
-
-  // if document is custom object created by classes, we need to use instanceof for narrowing:
-  if (document instanceof WordDocument) {
-    document.print();
-  }
-
-  // document.move(); // we got a compilation error - 'document is of type 'unknown'
+}
+function reject(message: string): never {
+  throw new Error(message);
 }
 
-class WordDocument {
-  print = () => {
-    console.log("printing...");
-  };
-}
+// if we remove the never return type of reject, compiler specify the return type of this function as void! and then it could not detect unreachable code
+reject("...");
+processEvents();
+console.log("Hello World"); // with annotating processEvents return type with never, this line become gray and it means it is never executed because it comes after calling this function.
 
-let wordDocument = new WordDocument();
-anotherRender(wordDocument);
-
-// Using known type is preferred to using any type in TS because the compiler forces us to do some type checking to make sure the methods and properties that we calling in target object.
+// if we enable this setting in tsconfig.json, we got the compilation error for unreachable codes:
+// "allowUnreachableCode": false
