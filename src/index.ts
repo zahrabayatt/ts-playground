@@ -1,21 +1,40 @@
+// Access Modifier:
+// public
+// private
+// protected
+
+// when we declare a property, all preopens are public by default.
+
 class Account {
-  readonly id: number; // readonly property
+  readonly id: number;
   owner: string;
-  balance: number;
-  nickname?: string; // optional property
+  // by convention we prefix the private member with _
+  private _balance: number;
+  nickname?: string;
+
   constructor(id: number, owner: string, balance: number) {
     this.id = id;
     this.owner = owner;
-    this.balance = balance;
+    this._balance = balance;
   }
 
   deposit(amount: number): void {
     if (amount <= 0) {
       throw new Error("Invalid amount");
     }
-    this.balance += amount;
+    this._balance += amount;
+  }
+
+  getBalance(): number {
+    return this._balance;
+  }
+
+  // private method
+  private calculateTAx() {
+    console.log("...");
   }
 }
 
 let account = new Account(1, "Zahra", 0);
-// account.id = 1; // we got a compilation error because id is readonly property
+// account.balance = -1; //we got a error because it is private member
+console.log(account.getBalance());
