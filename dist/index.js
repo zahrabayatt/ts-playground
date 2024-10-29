@@ -1,6 +1,24 @@
 "use strict";
-let phone = document.getElementById("phone");
-let anotherPhone = document.getElementById("phone");
-anotherPhone.value = "028374902";
-let myPhone = document.getElementById("phone");
+function render(document) {
+    document.move();
+    document.fly();
+    document.whateverWeWant();
+}
+function anotherRender(document) {
+    if (typeof document === "string") {
+        document.toUpperCase();
+    }
+    if (document instanceof WordDocument) {
+        document.print();
+    }
+}
+class WordDocument {
+    constructor() {
+        this.print = () => {
+            console.log("printing...");
+        };
+    }
+}
+let wordDocument = new WordDocument();
+anotherRender(wordDocument);
 //# sourceMappingURL=index.js.map

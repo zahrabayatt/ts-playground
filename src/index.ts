@@ -1,16 +1,34 @@
-// sometimes we know about type of object more than typescript, for example in this example the type of return type of getElementById is HTMLElement | null but we know that the type of element with phone id is HTMLInputElement which is a specific type of HTMLElement, in this case we can use type assertion with as keyboard
+// any type represent of any type in typescript and we should avoid to use it as much as possible, but in situations like converting a JS code to TS code, sometimes you need to use it, for example:
 
-let phone = document.getElementById("phone");
-// phone. //we only can see the method and properties for HTMLElement type not HTMInputElement
+// if we use any for document, it is possible base on document we pass these methods that we called didn't exist in document that we passed and it makes our program crashes
+function render(document: any) {
+  document.move();
+  document.fly();
+  document.whateverWeWant();
+}
 
-// HTMLElement - base type
-// HTMInputElement - child type
+// to avoid to happen this problem, we can use unknown type and for each of this call we gat a error that we don't know the type of the document, then for fixing that we can use narrowing:
 
-let anotherPhone = document.getElementById("phone") as HTMLInputElement;
-// phone. //we can see the method and properties for HTMInputElement
-anotherPhone.value = "028374902";
+function anotherRender(document: unknown) {
+  if (typeof document === "string") {
+    document.toUpperCase();
+  }
 
-// another syntax for using type assertion in TS is:
-let myPhone = <HTMLInputElement>document.getElementById("phone");
+  // if document is custom object created by classes, we need to use instanceof for narrowing:
+  if (document instanceof WordDocument) {
+    document.print();
+  }
 
-// we have this as keyword in other languages like C# but it works different, in TS as keyword doesn't perform for type conversion.
+  // document.move(); // we got a compilation error - 'document is of type 'unknown'
+}
+
+class WordDocument {
+  print = () => {
+    console.log("printing...");
+  };
+}
+
+let wordDocument = new WordDocument();
+anotherRender(wordDocument);
+
+// Using known type is preferred to using any type in TS because the compiler forces us to do some type checking to make sure the methods and properties that we calling in target object.
