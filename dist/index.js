@@ -1,24 +1,15 @@
 "use strict";
-function render(document) {
-    document.move();
-    document.fly();
-    document.whateverWeWant();
-}
-function anotherRender(document) {
-    if (typeof document === "string") {
-        document.toUpperCase();
+class Account {
+    constructor(id, owner, balance) {
+        this.id = id;
+        this.owner = owner;
+        this.balance = balance;
     }
-    if (document instanceof WordDocument) {
-        document.print();
-    }
-}
-class WordDocument {
-    constructor() {
-        this.print = () => {
-            console.log("printing...");
-        };
+    deposit(amount) {
+        if (amount <= 0) {
+            throw new Error("Invalid amount");
+        }
+        this.balance += amount;
     }
 }
-let wordDocument = new WordDocument();
-anotherRender(wordDocument);
 //# sourceMappingURL=index.js.map
