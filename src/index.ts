@@ -1,10 +1,7 @@
-// a class is a blueprint for creating objects.
-// we use capital naming for class names
 class Account {
-  id: number; // we need to initialize these properties in constructor
+  id: number;
   owner: string;
   balance: number;
-  // we can't annotate a type for constructor and it always return a instance a Account class
   constructor(id: number, owner: string, balance: number) {
     this.id = id;
     this.owner = owner;
@@ -18,3 +15,12 @@ class Account {
     this.balance += amount;
   }
 }
+
+let account = new Account(1, "Zahra", 0);
+account.deposit(100);
+console.log(account.balance);
+console.log(account);
+
+// for narrowing use instanceof instead of typeof
+console.log(typeof account); // object - the type of object always return object no matter what is underline class
+console.log(account instanceof Account); // true
