@@ -1,15 +1,23 @@
-function wrapINArray<T>(value: T) {
-  return [value];
+interface Result<T> {
+  data: T | null;
+  error: string | null;
 }
 
-let numbers = wrapINArray(1);
-
-// this method could be a method in class:
-
-class ArrayUtils {
-  static wrapInArray<T>(value: T) {
-    return [value];
-  }
+function fetch<T>(url: string): Result<T> {
+  console.log(url);
+  return {
+    data: null,
+    error: null,
+  };
 }
 
-let array = ArrayUtils.wrapInArray(1);
+interface User {
+  username: string;
+}
+
+interface Product {
+  title: string;
+}
+
+let result = fetch<User>("url");
+console.log(result.data?.username);

@@ -1,12 +1,12 @@
 "use strict";
-function wrapINArray(value) {
-    return [value];
+var _a;
+function fetch(url) {
+    console.log(url);
+    return {
+        data: null,
+        error: null,
+    };
 }
-let numbers = wrapINArray(1);
-class ArrayUtils {
-    static wrapInArray(value) {
-        return [value];
-    }
-}
-let array = ArrayUtils.wrapInArray(1);
+let result = fetch("url");
+console.log((_a = result.data) === null || _a === void 0 ? void 0 : _a.username);
 //# sourceMappingURL=index.js.map
