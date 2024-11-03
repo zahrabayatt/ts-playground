@@ -1,26 +1,29 @@
-// Static members belong to class not object and we have one instance of that in memory
-class Ride {
-  private static _activeRiders: number = 0;
+// Inheritance is a mechanism that allow us to reuse code.
+// Parent / Base / Super
+// Child / Driven / Sub
 
-  start() {
-    Ride._activeRiders++;
+class Person {
+  constructor(public firstName: string, public lastName: string) {}
+
+  get fullName() {
+    return this.firstName + " " + this.lastName;
   }
 
-  stop() {
-    Ride._activeRiders--;
-  }
-
-  // we make this method static to only exist in class
-  static get activeRides() {
-    return Ride._activeRiders;
+  walk() {
+    console.log("Walking");
   }
 }
 
-let ride1 = new Ride();
-ride1.start();
+class Student extends Person {
+  constructor(public studentId: number, firstName: string, lastName: string) {
+    super(firstName, lastName);
+  }
 
-let ride2 = new Ride();
-ride2.start();
+  takeTest() {
+    console.log("Taking a test");
+  }
+}
 
-console.log(Ride.activeRides);
-// Ride.activeRides = 1 // error it is readonly
+let student = new Student(1, "John", "Smith");
+student.takeTest();
+student.walk();
