@@ -1,13 +1,10 @@
 "use strict";
-class GoogleCalendar {
-    constructor(name) {
-        this.name = name;
-    }
-    addEvent() {
-        throw new Error("Method not implemented.");
-    }
-    removeEvent() {
-        throw new Error("Method not implemented.");
+class KeyValuePair {
+    constructor(key, value) {
+        this.key = key;
+        this.value = value;
     }
 }
+let pair1 = new KeyValuePair("1", "a");
+let pair = new KeyValuePair("1", "a");
 //# sourceMappingURL=index.js.map

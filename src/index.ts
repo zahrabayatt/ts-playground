@@ -1,33 +1,13 @@
-// Classes are blueprints for creating objects
-
-// abstract class Calender {
-//   constructor(public name: string) {}
-
-//   abstract addEvent(): void;
-//   abstract removeEvent(): void;
+// class KeyValuePair<T> {
+//   constructor(public key: T , public value: string) {}
 // }
 
-// or we can use interface to define a shape of object which is shorter:
+// let pair = new KeyValuePair<number>(1, "a");
 
-interface Calender {
-  name: string;
-  addEvent(): void;
-  removeEvent(): void;
+// another example:
+class KeyValuePair<K, V> {
+  constructor(public key: K, public value: V) {}
 }
 
-interface CloudCalender extends Calender {
-  sync(): void;
-}
-
-// implement calender
-class GoogleCalendar implements Calender {
-  constructor(public name: string) {}
-  addEvent(): void {
-    throw new Error("Method not implemented.");
-  }
-  removeEvent(): void {
-    throw new Error("Method not implemented.");
-  }
-}
-
-// if you don't have any logic and only decorations use interface otherwise use abstract class.
+let pair1 = new KeyValuePair<string, string>("1", "a");
+let pair = new KeyValuePair("1", "a");
