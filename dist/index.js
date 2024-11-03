@@ -1,22 +1,13 @@
 "use strict";
-class Shape {
-    constructor(color) {
-        this.color = color;
+class GoogleCalendar {
+    constructor(name) {
+        this.name = name;
     }
-    doSomething() {
-        console.log("doing Something");
+    addEvent() {
+        throw new Error("Method not implemented.");
     }
-}
-class Circle extends Shape {
-    constructor(radius, color) {
-        super(color);
-        this.radius = radius;
-    }
-    render() {
-        console.log("Rendering a circle");
+    removeEvent() {
+        throw new Error("Method not implemented.");
     }
 }
-let circle = new Circle(1, "red");
-circle.doSomething();
-circle.render();
 //# sourceMappingURL=index.js.map

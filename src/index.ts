@@ -1,29 +1,33 @@
-abstract class Shape {
-  constructor(public color: string) {}
+// Classes are blueprints for creating objects
 
-  // abstract method can only exist in abstract classes.
-  abstract render(): void;
+// abstract class Calender {
+//   constructor(public name: string) {}
 
-  // abstract classes can have not abstract methods
-  doSomething() {
-    console.log("doing Something");
+//   abstract addEvent(): void;
+//   abstract removeEvent(): void;
+// }
+
+// or we can use interface to define a shape of object which is shorter:
+
+interface Calender {
+  name: string;
+  addEvent(): void;
+  removeEvent(): void;
+}
+
+interface CloudCalender extends Calender {
+  sync(): void;
+}
+
+// implement calender
+class GoogleCalendar implements Calender {
+  constructor(public name: string) {}
+  addEvent(): void {
+    throw new Error("Method not implemented.");
+  }
+  removeEvent(): void {
+    throw new Error("Method not implemented.");
   }
 }
 
-class Circle extends Shape {
-  constructor(public radius: number, color: string) {
-    super(color);
-  }
-
-  override render() {
-    console.log("Rendering a circle");
-  }
-}
-
-// the shape class is abstract and it is only a sample and can not create a n instance of an abstract class.
-// let shape = new Shape("red");
-// shape.render();
-
-let circle = new Circle(1, "red");
-circle.doSomething();
-circle.render();
+// if you don't have any logic and only decorations use interface otherwise use abstract class.
