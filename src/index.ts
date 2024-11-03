@@ -1,7 +1,3 @@
-// Inheritance is a mechanism that allow us to reuse code.
-// Parent / Base / Super
-// Child / Driven / Sub
-
 class Person {
   constructor(public firstName: string, public lastName: string) {}
 
@@ -24,6 +20,17 @@ class Student extends Person {
   }
 }
 
-let student = new Student(1, "John", "Smith");
-student.takeTest();
-student.walk();
+class Teacher extends Person {
+  override get fullName() {
+    return "Professor " + super.fullName;
+  }
+
+  // we can do this but for best practice do above solution and enable noImplicitOverride to avoid doing this:
+
+  // get fullName() {
+  //   return "Professor " + super.fullName;
+  // }
+}
+
+let teacher = new Teacher("John", "Smith");
+console.log(teacher.fullName);
