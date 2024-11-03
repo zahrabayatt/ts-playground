@@ -24,13 +24,25 @@ class Teacher extends Person {
   override get fullName() {
     return "Professor " + super.fullName;
   }
-
-  // we can do this but for best practice do above solution and enable noImplicitOverride to avoid doing this:
-
-  // get fullName() {
-  //   return "Professor " + super.fullName;
-  // }
 }
 
-let teacher = new Teacher("John", "Smith");
-console.log(teacher.fullName);
+class Principal extends Person {
+  override get fullName() {
+    return "Principal " + super.fullName;
+  }
+}
+
+function printNames(people: Person[]) {
+  for (const person of people) {
+    console.log(person.fullName);
+  }
+}
+
+// Polymorphism
+printNames([
+  new Student(1, "Alex", "Bing"),
+  new Teacher("John", "Smith"),
+  new Principal("Marry", "King"),
+]);
+
+// Open Closed Principle: Classes should be open for extension and closed for modification.
