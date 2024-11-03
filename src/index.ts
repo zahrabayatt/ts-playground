@@ -1,12 +1,21 @@
+// private members: only accessible in the class
+// protected members: accessible in the class and the child classes.
+
+// protected members should not used often because it makes problems in code.
+
 class Person {
   constructor(public firstName: string, public lastName: string) {}
 
   get fullName() {
     return this.firstName + " " + this.lastName;
   }
-
-  walk() {
+  protected walk() {
     console.log("Walking");
+    this.think();
+  }
+
+  private think() {
+    console.log("thinking...");
   }
 }
 
@@ -16,6 +25,7 @@ class Student extends Person {
   }
 
   takeTest() {
+    console.log(this.walk);
     console.log("Taking a test");
   }
 }
@@ -31,18 +41,3 @@ class Principal extends Person {
     return "Principal " + super.fullName;
   }
 }
-
-function printNames(people: Person[]) {
-  for (const person of people) {
-    console.log(person.fullName);
-  }
-}
-
-// Polymorphism
-printNames([
-  new Student(1, "Alex", "Bing"),
-  new Teacher("John", "Smith"),
-  new Principal("Marry", "King"),
-]);
-
-// Open Closed Principle: Classes should be open for extension and closed for modification.
