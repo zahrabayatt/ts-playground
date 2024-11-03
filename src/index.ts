@@ -1,43 +1,29 @@
-// private members: only accessible in the class
-// protected members: accessible in the class and the child classes.
+abstract class Shape {
+  constructor(public color: string) {}
 
-// protected members should not used often because it makes problems in code.
+  // abstract method can only exist in abstract classes.
+  abstract render(): void;
 
-class Person {
-  constructor(public firstName: string, public lastName: string) {}
-
-  get fullName() {
-    return this.firstName + " " + this.lastName;
-  }
-  protected walk() {
-    console.log("Walking");
-    this.think();
-  }
-
-  private think() {
-    console.log("thinking...");
+  // abstract classes can have not abstract methods
+  doSomething() {
+    console.log("doing Something");
   }
 }
 
-class Student extends Person {
-  constructor(public studentId: number, firstName: string, lastName: string) {
-    super(firstName, lastName);
+class Circle extends Shape {
+  constructor(public radius: number, color: string) {
+    super(color);
   }
 
-  takeTest() {
-    console.log(this.walk);
-    console.log("Taking a test");
+  override render() {
+    console.log("Rendering a circle");
   }
 }
 
-class Teacher extends Person {
-  override get fullName() {
-    return "Professor " + super.fullName;
-  }
-}
+// the shape class is abstract and it is only a sample and can not create a n instance of an abstract class.
+// let shape = new Shape("red");
+// shape.render();
 
-class Principal extends Person {
-  override get fullName() {
-    return "Principal " + super.fullName;
-  }
-}
+let circle = new Circle(1, "red");
+circle.doSomething();
+circle.render();
