@@ -1,50 +1,9 @@
-// sometimes we need base a type of another type, this is called type mapping:
+// What are Decorators? they are attributes that we apply to our classes and its members and with this we can change how they behave.
 
-interface Product {
-  name: string;
-  price: number;
-}
+// decorators are frequently used in frameworks like angular and vue like @component in angular but under the hood these decorators are a just a function that get called by js runtime (js engin). and in this functions we have a chance to modify a class, we can add new properties or methods or change the implementation of the existing the methods.
 
-// we using type mapping to create a type that is like Product but all properties is readonly:
+// // @Component - angular decoration to convert a class to component in web application
+// class ProfileComponent {}
 
-// we use type alias because you can do type mapping in interfaces:
-type ReadOnlyProduct = {
-  // to create properties we use:
-  // Index signature
-  // keyof operator: using it, we got all keys or property of Product
-  // in operator: using it, we iterate over keyof Product and in each iteration Product is equal to one of the key(property name) of product
-  // Product[Property] is type of property
-  readonly [Property in keyof Product]: Product[Property];
-};
-
-let product: ReadOnlyProduct = {
-  name: "a",
-  price: 1,
-};
-// product.name = 'b' // error - it is readonly property
-
-// or we can create a generic readonly type:
-type ReadOnly<T> = {
-  readonly [K in keyof T]: T[K];
-};
-
-let anotherProduct: Readonly<Product> = {
-  name: "a",
-  price: 1,
-};
-// anotherProduct.name = 'b' // error - it is readonly property
-
-// Example
-// using type mapping we can create a type and make each property optical:
-type Optional<T> = {
-  [K in keyof T]?: T[K];
-};
-
-// Example
-// using type mapping we can create a type and make each property nullable:
-type Nullable<T> = {
-  [K in keyof T]: T[K] | null;
-};
-
-// because these types are pretty useful they are actually built-in in typescript:
-// typescript utility types docs: https://www.typescriptlang.org/docs/handbook/utility-types.html
+// To create a decorators, because it is a experimental features, we need to enable this setting in tsconfig.json:
+// "experimentalDecorators": true,                   /* Enable experimental support for legacy experimental decorators. */
