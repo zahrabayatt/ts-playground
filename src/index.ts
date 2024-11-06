@@ -1,28 +1,32 @@
-// how we can enhance our methods in class using decorators:
+// how to create a decorator to applied to accessors meaning getters and setters:
 
-// we need three type of parameters for method decorators:
-function Log(target: any, methodName: string, descriptor: PropertyDescriptor) {
+// parameters of accessor decorators are like method decorators:
+function Capitalize(
+  target: any,
+  methodName: string,
+  descriptor: PropertyDescriptor
+) {
   console.log(target, methodName);
-  // we can complexly replace the method with new implementor
-  // descriptor.value = function () {
-  //   console.log("new implementation");
-  // };
-  // but it is better to enhance the original method:
-  const original = descriptor.value as Function;
-  // the args is equal to parameters of methods that we applied this decorator
-  descriptor.value = function (...args: any) {
-    console.log("Before");
-    original.call(this, ...args); // use function named instead of arrow function for descriptor.value because arrow function doesn't have their own this
-    console.log("After");
+  const original = descriptor.get;
+  // getters doesn't have any arguments
+  descriptor.get = function () {
+    // original(getter) can be undefined
+    const result = original?.call(this);
+
+    return typeof result === "string" ? result.toUpperCase() : result;
   };
 }
 
 class Person {
-  @Log
-  say(message: string) {
-    console.log("Person says " + message);
+  constructor(public firstName: string, public lastName: string) {}
+
+  @Capitalize
+  get fullName() {
+    //return `${this.firstName} ${this.lastName}`;
+    //return null;
+    return 0;
   }
 }
 
-let person = new Person();
-person.say("Hello");
+let person = new Person("Alex", "King");
+console.log(person.fullName);

@@ -5,23 +5,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-function Log(target, methodName, descriptor) {
+function Capitalize(target, methodName, descriptor) {
     console.log(target, methodName);
-    const original = descriptor.value;
-    descriptor.value = function (...args) {
-        console.log("Before");
-        original.call(this, ...args);
-        console.log("After");
+    const original = descriptor.get;
+    descriptor.get = function () {
+        const result = original === null || original === void 0 ? void 0 : original.call(this);
+        return typeof result === "string" ? result.toUpperCase() : result;
     };
 }
 class Person {
-    say(message) {
-        console.log("Person says " + message);
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    get fullName() {
+        return 0;
     }
 }
 __decorate([
-    Log
-], Person.prototype, "say", null);
-let person = new Person();
-person.say("Hello");
+    Capitalize
+], Person.prototype, "fullName", null);
+let person = new Person("Alex", "King");
+console.log(person.fullName);
 //# sourceMappingURL=index.js.map
