@@ -1,8 +1,13 @@
-// import Store, { Format } from "./storage";
+// import { Circle } from "./shapes/Circle";
+// import { Square } from "./shapes/Square";
 
-// or we can import everything like this:
+// or we can export it like this using re-exporting method to combined all shapes modules in single module called index.ts:
+// import { Circle, Square } from "./shapes/index";
+// we don't even to have to type index module:
+import { Circle, Square } from "./shapes";
 
-import * as Shapes from "./storage";
+let circle = new Circle(1);
+console.log(circle.radius);
 
-console.log(Shapes.Format.Compressor);
-console.log(Shapes.default); // Store class
+let square = new Square(2);
+console.log(square.width);
