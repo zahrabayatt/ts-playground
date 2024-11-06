@@ -1,36 +1,17 @@
-// how to create a decorator to enhancing properties:
+type WatchedParameter = {
+  methodName: string;
+  parameterIndex: number;
+};
 
-function MinLength(length: number) {
-  return (target: any, propertyName: string) => {
-    let value: string;
-
-    const descriptor: PropertyDescriptor = {
-      get() {
-        return value;
-      },
-      set(newValue: string) {
-        if (newValue.length < length) {
-          throw new Error(
-            `${propertyName} should be at least ${length} characters.`
-          );
-        }
-        value = newValue;
-      },
-    };
-
-    Object.defineProperty(target, propertyName, descriptor);
-  };
+const watchedParameters: WatchedParameter[] = [];
+function Watch(target: any, methodName: string, parameterIndex: number) {
+  console.log(target);
+  watchedParameters.push({ methodName, parameterIndex });
 }
-
-class User {
-  @MinLength(4)
-  password: string;
-
-  constructor(password: string) {
-    this.password = password;
+class Vehicle {
+  move(@Watch speed: number) {
+    console.log(speed);
   }
 }
 
-let user = new User("1234");
-// user.password = "1";
-console.log(user.password);
+console.log(watchedParameters);
