@@ -1,17 +1,8 @@
-type WatchedParameter = {
-  methodName: string;
-  parameterIndex: number;
-};
+// while we import something, we can optionality rename it to something else using as
+import { Circle, Square as MySquare } from "./shapes";
 
-const watchedParameters: WatchedParameter[] = [];
-function Watch(target: any, methodName: string, parameterIndex: number) {
-  console.log(target);
-  watchedParameters.push({ methodName, parameterIndex });
-}
-class Vehicle {
-  move(@Watch speed: number) {
-    console.log(speed);
-  }
-}
+let circle = new Circle(1);
+console.log(circle.radius);
 
-console.log(watchedParameters);
+let square = new MySquare(2);
+console.log(square.width);
