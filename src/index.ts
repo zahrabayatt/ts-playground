@@ -1,10 +1,9 @@
-// sometimes we need to pass arguments to our decorators, this is how we create parameterize decorators:
+// we can apply multiples decorators to the class or its members:
 
 type ComponentOptions = {
   selector: string;
 };
 
-// Decorator factory
 function Component(options: ComponentOptions) {
   return (constructor: Function) => {
     console.log("Component decorator called");
@@ -16,5 +15,18 @@ function Component(options: ComponentOptions) {
   };
 }
 
+function Pipe(constructor: Function) {
+  console.log("Pipe decorator called");
+  constructor.prototype.pipe = true;
+}
+
 @Component({ selector: "#my-profile" })
+@Pipe
 class ProfileComponent {}
+
+// console output:
+// Pipe decorator called
+// Component decorator called
+
+// our decorators applied in reverse order that we added in code:
+// they called something like this: f(g(x))
