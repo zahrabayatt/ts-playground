@@ -1,9 +1,26 @@
-// What are Decorators? they are attributes that we apply to our classes and its members and with this we can change how they behave.
+// how to create a decorator that we can apply to our class:
 
-// decorators are frequently used in frameworks like angular and vue like @component in angular but under the hood these decorators are a just a function that get called by js runtime (js engin). and in this functions we have a chance to modify a class, we can add new properties or methods or change the implementation of the existing the methods.
+// we use pascal naming for decorator names
+// parameter of decorator that we applied to class is constructor of class
+function Component(constructor: Function) {
+  console.log("Component decorator called");
+  // every object in JS has a prototype from which it inherits various properties and methods, so each class or it's members that has this decorator tha have these new members:
+  constructor.prototype.uniqueId = Date.now();
+  constructor.prototype.insertInDOM = () => {
+    console.log("Inserting the component in the DOM");
+  };
+}
 
-// // @Component - angular decoration to convert a class to component in web application
-// class ProfileComponent {}
+@Component
+class ProfileComponent {}
 
-// To create a decorators, because it is a experimental features, we need to enable this setting in tsconfig.json:
-// "experimentalDecorators": true,                   /* Enable experimental support for legacy experimental decorators. */
+// we can do this using inheritance:
+
+class Component1 {
+  uniqueId: number = Date.now();
+  insertInDOM(): void {
+    console.log("Inserting the component in the DOM");
+  }
+}
+
+class ProfileComponent1 extends Component1 {}
