@@ -1,9 +1,6 @@
 export default class Store {}
 
-export enum Fromat {
+export enum Format {
   Raw,
   Compressor,
 }
-
-class Compressor {}
-class Encryptor {}
