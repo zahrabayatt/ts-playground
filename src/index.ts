@@ -1,7 +1,12 @@
-// to import js code, enable this setting in tsconfig.json:
-// "allowJs": true,                                  /* Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files. */
-
 import { calculateTax } from "./tax";
 
-const tax = calculateTax(10000);
+// enable this setting to get some basic type checking for js codes:
+// "checkJs": true,                                  /* Enable error reporting in type-checked JavaScript files. */0
+
+// if we don't disable ts in tax.js and compile our code using tsc command, we see the compilation error for 11 line:
+// src/tax.js:1:30 - error TS7006: Parameter 'income' implicitly has an 'any' type.
+// 1 export function calculateTax(income)
+// Found 1 error in src/tax.js:1
+
+const tax = calculateTax("hello");
 console.log(tax);
